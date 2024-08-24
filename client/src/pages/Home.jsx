@@ -37,8 +37,8 @@ export const Home = () => {
     <Info/>
     {/* <About/> */}
     <Detection/>
-    {/* <Feedback/> */}
-    {/* <Footer/> */}
+    <Feedback/>
+    <Footer/>
     </>
   )
 }

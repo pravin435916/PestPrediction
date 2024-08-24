@@ -14,10 +14,10 @@ function App() {
     {/* <Navbar/> */}
        <Routes>
           <Route path='/' element={<Home/>}/>
-          {/* <Route path='/about' element={<About/>}/> */}
+          <Route path='/about' element={<About/>}/>
           <Route path='/posts' element={<Posts/>}/>
           <Route path='/detect' element={<Detection/>}/>
-          {/* <Route path='/feedback' element={<Feedback/>}/> */}
+          <Route path='/feedback' element={<Feedback/>}/>
        </Routes>
        <ChatBot/>
     </BrowserRouter>
