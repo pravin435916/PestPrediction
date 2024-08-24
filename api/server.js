@@ -71,7 +71,7 @@ app.post('/chatbot', (req, res) => {
     }
     setTimeout(() => {
       res.json(response);
-    }, 1000);
+    }, 1500);
   });
 
 

@@ -37,7 +37,7 @@ async def load_models():
         raise RuntimeError(f"Error loading models: {e}")
 
 # Class names
-p_CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
+p_CLASS_NAMES = ["Potato___Early_blight", "Potato___Late_blight", "Potato___healthy"]
 t_CLASS_NAMES = ['Early Blight', 'Late Blight', 'YellowLeaf Curl Virus', 'Mosaic Virus', 'Healthy']
 pep_CLASS_NAMES = ['Bell Bacterial Spot', 'Bell Healthy']
 g_CLASS_NAMES = ['Early Leaf Spot', 'Early Rust', 'Healthy Leaf', 'Late Leaf Spot', 'Nutrition Deficiency', 'Rust']
@@ -45,6 +45,7 @@ b_CLASS_NAMES = ['Anthracnose', 'Healthy', 'Leaf Crinkle', 'Powdery Mildew', 'Ye
 
 # Image preprocessing function
 def read_file_as_image(data) -> np.ndarray:
+    # image = np.array(Image.open(BytesIO(data)))
     image = Image.open(BytesIO(data)).convert("RGB")  # Ensure the image is in RGB format
     image = image.resize((256, 256))  # Resize the image to the required input size
     image = np.array(image) / 255.0  # Normalize the image to [0, 1]
@@ -71,6 +72,7 @@ async def predict(plant: str, file: UploadFile = File(...)):
         if plant == "potato":
             predictions = potato_MODEL.predict(img_batch)
             predicted_class = p_CLASS_NAMES[np.argmax(predictions[0])]
+            print(f"Predictions: {predictions}")
         # elif plant == "tomato":
         #     predictions = tomato_MODEL.predict(img_batch)
         #     predicted_class = t_CLASS_NAMES[np.argmax(predictions[0])]
@@ -83,6 +85,8 @@ async def predict(plant: str, file: UploadFile = File(...)):
         # elif plant == "blackgram":
         #     predictions = blackgram_MODEL.predict(img_batch)
         #     predicted_class = b_CLASS_NAMES[np.argmax(predictions[0])]
+        else:
+            print("Nhi Hai")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error during prediction: {e}")
 
