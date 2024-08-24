@@ -9,9 +9,9 @@ const PORT = process.env.PORT || 8000;
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
+// DB = 'mongodb+srv://pravinnandankar03:piyu916@cluster0.bpci2y3.mongodb.net/plant'
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO, {
+mongoose.connect(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(()=> console.log("MOngodb Connected"));
