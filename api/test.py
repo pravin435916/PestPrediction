@@ -1,17 +1,38 @@
+import numpy as np
+from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 
-# Load the model (use the appropriate file extension based on what you saved)
+# Load the model
 model = load_model("../saved_models/potato_model.keras")
-# or
-# model = load_model("../saved_models/potato_model.h5")
-# Example input data to test the model (make sure it has the right shape)
-import numpy as np
 
-# Suppose your model expects input of shape (1, height, width, channels)
-test_input = np.random.rand(1, 64, 64, 3)  # Replace with real data
+# Function to preprocess the image
+def preprocess_image(image_path):
+    img = image.load_img(image_path, target_size=(224, 224))  # Ensure that the size matches the training size
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0  # Normalize as per training
+    return img_array
 
-# Predict using the loaded model
-predictions = model.predict(test_input)
+# Load and preprocess the image
+image_path = '../images/healthy.JPG'
+img_array = preprocess_image(image_path)
 
-# Print the predictions
-print(predictions)
+# Make predictions
+predictions = model.predict(img_array)
+
+# Print raw predictions to inspect them
+print(f"Raw Predictions: {predictions}")
+
+# Assuming there are 3 classes: Early Blight, Healthy, Late Blight
+class_labels = ['Healthy','Early Blight', 'Late Blight']
+
+# Get the index of the highest probability
+predicted_index = np.argmax(predictions)
+
+# Get the corresponding class label
+predicted_class = class_labels[predicted_index]
+
+# Get the confidence of the prediction
+confidence = predictions[predicted_index]
+
+print(f"Predicted Class: {predicted_class}, Confidence: {confidence}")
