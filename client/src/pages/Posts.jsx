@@ -29,7 +29,7 @@ const Posts = () => {
               {/* Correct the Rating component */}
               <Rating name={`rating-${post._id}`} value={post.rating} readOnly />
             </div>
-            <p className="">{post.msg}</p>
+            <p className="">{post.message}</p> 
           </div>
         ))}
       </div>

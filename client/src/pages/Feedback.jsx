@@ -86,7 +86,7 @@ export const Feedback = () => {
       </div>
       </div>
       <div>
-      <Posts/>
+      {/* <Posts/> */}
       </div>
     </div>
   );
