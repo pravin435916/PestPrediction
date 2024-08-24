@@ -9,7 +9,19 @@ const Posts = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/posts');
-        setPosts(response.data);
+        
+        // Log the response structure for clarity
+        console.log('API response:', response.data);
+
+        // Extract posts from the data field
+        const postsArray = response.data.data;
+
+        if (Array.isArray(postsArray)) {
+          setPosts(postsArray);
+        } else {
+          console.error('The posts data is not an array:', postsArray);
+          setPosts([]); // Fallback to an empty array
+        }
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -26,10 +38,9 @@ const Posts = () => {
           <div key={post._id} className="bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold mb-2">@{post.name}</h2>
             <div className="mb-4">
-              {/* Correct the Rating component */}
-              <Rating name={`rating-${post._id}`} value={post.rating} readOnly />
+              <Rating name={`rating-${post._id}`} value={post.rating || 0} readOnly />
             </div>
-            <p className="">{post.message}</p> 
+            <p>{post.msg}</p>
           </div>
         ))}
       </div>

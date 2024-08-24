@@ -5,20 +5,21 @@ import { TextField, Rating } from '@mui/material';
 import {toast} from "react-hot-toast"
 import leftImage from '/assets/home/girl.svg'; // Import your left image
 import Posts from './Posts';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const Feedback = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
-
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:8000/api/posts', {
-        name,
-        message: message,
+        name:user.name,
+        msg: message,
         rating: parseInt(rating),
       });
       if(!message || !rating) {
