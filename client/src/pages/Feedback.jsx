@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { TextField, Rating } from '@mui/material';
 import {toast} from "react-hot-toast"
 import leftImage from '/assets/home/girl.svg'; // Import your left image
+import Posts from './Posts';
 
 export const Feedback = () => {
   const [name, setName] = useState('');
@@ -41,7 +42,9 @@ export const Feedback = () => {
   };
 
   return (
-    <div className="h-[80vh] mx-auto mt-8 flex justify-center items-center">
+    <div className="h-max mx-auto mt-8 flex flex-col justify-center items-center">
+      <div className='flex gap-8'> 
+
       <div className="w-1/2 p-2 center-pos">
         <img className="w-[38rem] h-[38rem]" src={leftImage} alt="Left" />
       </div>
@@ -80,6 +83,10 @@ export const Feedback = () => {
             </button>
           </form>
         </div>
+      </div>
+      </div>
+      <div>
+      <Posts/>
       </div>
     </div>
   );
