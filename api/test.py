@@ -14,7 +14,7 @@ def preprocess_image(image_path):
     return img_array
 
 # Load and preprocess the image
-image_path = '../images/healthy.JPG'
+image_path = '../images/2.JPG'
 img_array = preprocess_image(image_path)
 
 # Make predictions
